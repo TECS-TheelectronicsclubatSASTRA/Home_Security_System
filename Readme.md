@@ -4,7 +4,7 @@ A motion-triggered security camera built around an **ESP32-CAM (AI-Thinker)** an
 
 No cloud subscription. No monthly fee. No app to install beyond Telegram itself.
 
-![Wiring diagram of the ESP32-CAM home security system](images/wiring-diagram.jpeg)
+![Wiring diagram of the ESP32-CAM home security system](wiring-diagram.jpeg)
 
 ---
 
@@ -69,7 +69,7 @@ The image is never stored on an SD card in the basic version — it goes from th
 |---|-----------|-----|-------|
 | 1 | ESP32-CAM module (AI-Thinker) | 1 | Must include the OV2640 camera ribbon |
 | 2 | PIR motion sensor (HC-SR501) | 1 | HC-SR312 / AM312 also works at 3.3V |
-| 3 | ESP32 main board | **Only needed for programming** |
+| 3 | ESP32 main board / FTDI | **Only needed for programming** |
 | 4 | 5V DC power adapter, 2A minimum | 1 | 1A often causes brownouts — do not skimp |
 | 5 | Jumper wires (male–female, female–female) | ~10 | |
 | 6 | 470 µF / 10V electrolytic capacitor | 1 | Across 5V and GND — strongly recommended |
@@ -105,7 +105,7 @@ Holding the board with the camera facing you and the antenna at the top:
 
 **Safely usable GPIOs:** 12, 13, 14, 15, 2, 16 — and 1/3 if you are not using serial. We use **GPIO 13**.
 
-> ⚠️ Avoid GPIO 12 for the PIR. It is a strapping pin (MTDI); if it is held HIGH during boot the chip tries to run the flash at 1.8 V and will fail to start. GPIO 13 has no such restriction, which is exactly why the diagram uses it.
+>  Avoid GPIO 12 for the PIR. It is a strapping pin (MTDI); if it is held HIGH during boot the chip tries to run the flash at 1.8 V and will fail to start. GPIO 13 has no such restriction, which is exactly why the diagram uses it.
 
 ### 5.2 Wiring Table — PIR Sensor to ESP32-CAM
 
@@ -138,7 +138,7 @@ Connect these *only while flashing*, then disconnect GPIO 0 before normal use.
 | RX | U0T (GPIO 1) |
 | — | **GPIO 0 → GND** (jumper wire, puts board in flash mode) |
 
-> 📌 Note on FTDI voltage: set the adapter jumper to **5V** and feed the `5V` pin. The board has an onboard regulator. Powering the `3V3` pin from a 3.3V FTDI works but many adapters cannot supply the ~300 mA peak the Wi-Fi radio needs, causing upload failures. If uploads keep failing, power the board from the wall adapter and use the FTDI only for TX/RX/GND.
+>  Note on FTDI voltage: set the adapter jumper to **5V** and feed the `5V` pin. The board has an onboard regulator. Powering the `3V3` pin from a 3.3V FTDI works but many adapters cannot supply the ~300 mA peak the Wi-Fi radio needs, causing upload failures. If uploads keep failing, power the board from the wall adapter and use the FTDI only for TX/RX/GND.
 
 ### 5.5 Assembly Order
 
@@ -232,7 +232,7 @@ If "Hello" arrives in Telegram, your token and chat ID are both correct and the 
 | **UniversalTelegramBot** | Telegram API wrapper |
 | **ArduinoJson** | Required dependency (use v6.x) |
 
-> ⚠️ ArduinoJson v7 changed its API. If you hit compile errors mentioning `StaticJsonDocument`, roll back to the latest **6.x** release in the Library Manager version dropdown.
+>  ArduinoJson v7 changed its API. If you hit compile errors mentioning `StaticJsonDocument`, roll back to the latest **6.x** release in the Library Manager version dropdown.
 
 ### 8.3 Board settings
 
@@ -284,7 +284,7 @@ IP address: 192.168.1.47
 PIR warming up (45s)...
 ```
 
-And a Telegram message reading **🟢 Security system online.** should arrive.
+And a Telegram message reading ** Security system online.** should arrive.
 
 Then:
 
